@@ -1,3 +1,10 @@
+import uuid
 from django.db import models
+from django.contrib.auth.models import User
 
-# Create your models here.
+
+class Customer(User):
+    customer_id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
+    phone_no = models.CharField(max_length=15)
+    location_lat = models.FloatField()
+    location_long = models.FloatField()
