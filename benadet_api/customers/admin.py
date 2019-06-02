@@ -1,3 +1,15 @@
 from django.contrib import admin
+from .models import Customer
 
-# Register your models here.
+
+class CustomerInline(admin.StackedInline):
+    model = Customer
+    can_delete = False
+
+
+class CustomerAdmin(admin.ModelAdmin):
+    list_display = ('user', 'phone_no')
+
+
+admin.site.register(Customer, CustomerAdmin)
+

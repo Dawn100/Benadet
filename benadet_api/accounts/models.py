@@ -8,7 +8,7 @@ class Role(models.Model):
     role_name = models.CharField(max_length=100)
 
 
-class User(User):
-    user_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    active = models.BooleanField(default=False)
+class Staff(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    staff_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     roles = models.ManyToManyField(Role)
