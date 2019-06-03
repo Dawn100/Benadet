@@ -8,7 +8,7 @@ def product_directory_path(instance, filename):
 
 
 def category_directory_path(instance, filename):
-    return 'category/photo_{0}/{1}'.format(instance.product.product_id, str(uuid.uuid4()) + filename)
+    return 'categories/photo_{0}/{1}'.format(instance.category_id, str(uuid.uuid4()) + filename)
 
 
 class Category(models.Model):
@@ -75,11 +75,11 @@ class AttributeValue(models.Model):
 
 class ProductPhoto(models.Model):
     product_photo_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    product = models.ForeignKey(Product, on_delete=models.PROTECT)
+    product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='photos')
     photo = models.ImageField(upload_to=product_directory_path, null=True)
 
     def __str__(self):
-        return self.product.name + ' photo url :' + self.photo.name
+        return str(self.photo)
 
 
 class Review(models.Model):
